@@ -1,0 +1,4 @@
+Vagrantfiles
+============
+
+Collection of Vagrantfile
