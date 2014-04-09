@@ -1,0 +1,26 @@
+Vagrant.configure("2") do |config|
+  # By default, we use Ubuntu 12.04.4 LTS (Precise Pangolin)
+  # More boxes: http://www.vagrantbox.es/
+  config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  # Use NFS as a shared folder
+  # Share current folder to vm, edit it at your own
+  config.vm.synced_folder ".", "/var/www", :nfs => true
+
+  # Share current folder to vm, edit it at your own
+  config.vm.network :forwarded_port, guest: 3000, host: 3000
+
+  # An unique IP is required, edit it at your own
+  config.vm.network :private_network, ip: "172.17.0.12"
+
+  # Fix stdin: is not a tty error
+  config.ssh.pty = true
+
+  # Can use Chef or Puppet. In this simple example, we use shell
+  config.vm.provision :shell, path: "provision.sh"
+
+  # Configure vm here
+  # config.vm.provider :virtualbox do |vb|
+  # end
+end
